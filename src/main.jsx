@@ -134,21 +134,7 @@ function HomePage({ onNavigate }) {
         </button>
       </section>
 
-      <section className="hero-band">
-        <div className="hero-copy">
-          <p className="kicker">Professional trading system</p>
-          <h2>One operating model for rules, execution, and scoring.</h2>
-          <p>
-            Click any framework below to open its dedicated page with the
-            checklist, role, and operating steps.
-          </p>
-        </div>
-        <div className="hero-metrics">
-          <Metric icon={ShieldCheck} value="01" label="Foundation" />
-          <Metric icon={PlayCircle} value="05" label="Core stages" />
-          <Metric icon={Gauge} value="05" label="Score controls" />
-        </div>
-      </section>
+ 
 
       <Flowchart onNavigate={onNavigate} />
     </Shell>
