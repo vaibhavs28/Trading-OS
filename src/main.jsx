@@ -150,8 +150,8 @@ function HomePage({ onNavigate }) {
         </div>
         <div className="hero-metrics">
           <Metric icon={ShieldCheck} value="01" label="Foundation" />
-          <Metric icon={PlayCircle} value="05" label="Core stages" />
-          <Metric icon={Gauge} value="05" label="Score controls" />
+          <Metric icon={PlayCircle} value="02" label="Core stages" />
+          <Metric icon={Gauge} value="03" label="Score controls" />
         </div>
       </section>
 
