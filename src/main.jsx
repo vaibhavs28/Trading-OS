@@ -63,6 +63,32 @@ const frameworks = {
       ["Audit", "Review the result, process score, and improvement action after the trade closes."],
     ],
   },
+  equanimity: {
+    title: "Equanimity OS",
+    eyebrow: "Trading checklist",
+    color: "teal",
+    icon: Brain,
+    summary:
+      "A mental checklist for staying neutral before, during, and after every trading decision.",
+    points: [
+      "Identity",
+      "Awareness",
+      "Intention",
+      "Reality",
+      "Non-Attachment",
+      "Execution",
+      "Return to Neutral",
+    ],
+    sections: [
+      ["Identity", "Confirm you are trading from the role of a calm trader, not from ego, fear, revenge, or the need to prove yourself."],
+      ["Awareness", "Check your body, emotions, urgency, boredom, and the current market environment before interpreting the setup."],
+      ["Intention", "Define the exact decision: wait, enter, reduce, exit, or do nothing. The action must be clear before the trade is taken."],
+      ["Reality", "Accept what price is showing now. Trade the current structure, invalidation, volatility, and context instead of the version you wanted."],
+      ["Non-Attachment", "Accept both target and stop before entering. One trade is only one sample and does not define your ability."],
+      ["Execution", "Execute the plan with correct size, clear invalidation, and rule-based management. No improvising after entry."],
+      ["Return to Neutral", "Close the loop after the trade. Record, breathe, release the outcome, and reset before the next decision."],
+    ],
+  },
   scoring: {
     title: "Scoring Framework",
     eyebrow: "Performance control",
@@ -122,6 +148,7 @@ function Shell({ children }) {
     <main className="app-shell">
       <div className="background-grid" />
       {children}
+      <Footer />
     </main>
   );
 }
@@ -142,7 +169,7 @@ function HomePage({ onNavigate }) {
       <section className="hero-band">
         <div className="hero-copy">
           <p className="kicker">Professional trading system</p>
-          <h2>One operating model for rules, execution, and scoring.</h2>
+          <h2>One operating model for rules, execution, mindset, and scoring.</h2>
           <p>
             Click any framework below to open its dedicated page with the
             checklist, role, and operating steps.
@@ -151,7 +178,8 @@ function HomePage({ onNavigate }) {
         <div className="hero-metrics">
           <Metric icon={ShieldCheck} value="01" label="Foundation" />
           <Metric icon={PlayCircle} value="02" label="Core stages" />
-          <Metric icon={Gauge} value="03" label="Score controls" />
+          <Metric icon={Brain} value="03" label="Equanimity" />
+          <Metric icon={Gauge} value="04" label="Score controls" />
         </div>
       </section>
 
@@ -172,10 +200,11 @@ function Flowchart({ onNavigate }) {
       <div className="connector main-horizontal" />
 
       <div className="framework-grid">
-        {Object.entries(frameworks).map(([key, framework]) => (
+        {Object.entries(frameworks).map(([key, framework], index) => (
           <FrameworkColumn
             key={key}
             id={key}
+            index={index + 1}
             framework={framework}
             onNavigate={onNavigate}
           />
@@ -185,23 +214,40 @@ function Flowchart({ onNavigate }) {
   );
 }
 
-function FrameworkColumn({ id, framework, onNavigate }) {
+function FrameworkColumn({ id, index, framework, onNavigate }) {
   const Icon = framework.icon;
   return (
     <article className={`framework-column ${framework.color}`}>
       <button className="framework-node" onClick={() => onNavigate(id)}>
+        <span className="framework-number">{String(index).padStart(2, "0")}</span>
         <Icon size={22} />
         <span>{framework.title}</span>
       </button>
-      <div className="connector short-vertical" />
       <button className="detail-card" onClick={() => onNavigate(id)}>
+        <span className="card-icon">
+          <Icon size={26} />
+        </span>
+        <div>
+          <h3>{framework.title}</h3>
+          <p>{framework.summary}</p>
+        </div>
         <ol>
           {framework.points.map((point) => (
             <li key={point}>{point}</li>
           ))}
         </ol>
       </button>
+      {index < Object.keys(frameworks).length && <FlowArrow />}
     </article>
+  );
+}
+
+function FlowArrow() {
+  return (
+    <div className="flow-arrow" aria-hidden="true">
+      <span />
+      <ChevronRight size={22} />
+    </div>
   );
 }
 
@@ -219,13 +265,15 @@ function TradingOsPage({ onNavigate }) {
           <h2>Operating sequence</h2>
           <p>
             The system starts with foundation rules, moves through core trading
-            workflow, and closes the loop with scoring. Each page works like a
+            workflow, keeps the trader neutral with Equanimity OS, and closes
+            the loop with scoring. Each page works like a
             professional operating manual for that layer.
           </p>
           <div className="timeline">
             <Step number="1" label="Define beliefs and rules" />
             <Step number="2" label="Run the trade workflow" />
-            <Step number="3" label="Score and improve decisions" />
+            <Step number="3" label="Check equanimity before action" />
+            <Step number="4" label="Score and improve decisions" />
           </div>
         </div>
         <div className="side-panel">
@@ -335,6 +383,16 @@ function Step({ number, label }) {
       <span>{number}</span>
       <p>{label}</p>
     </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="app-footer">
+      <span>Trading OS</span>
+      <span>Foundation {">"} Core {">"} Equanimity OS {">"} Scoring</span>
+      <span>Process before outcome</span>
+    </footer>
   );
 }
 

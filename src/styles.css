@@ -21,6 +21,8 @@ button {
 }
 
 .app-shell {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   overflow: hidden;
   position: relative;
@@ -133,6 +135,7 @@ h2 {
 }
 
 .hero-metrics {
+  align-content: start;
   display: grid;
   gap: 12px;
 }
@@ -161,7 +164,7 @@ h2 {
 .chart-area {
   margin: 0 auto;
   max-width: 1180px;
-  min-height: 620px;
+  min-height: 560px;
   position: relative;
 }
 
@@ -201,100 +204,244 @@ h2 {
   position: absolute;
 }
 
+.connector::after {
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 9px solid #516078;
+  bottom: -8px;
+  content: "";
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
 .main-vertical {
-  height: 86px;
+  height: 54px;
   left: 50%;
   top: 92px;
   width: 2px;
 }
 
 .main-horizontal {
+  background: #516078;
   height: 2px;
-  left: 11%;
-  right: 11%;
-  top: 178px;
+  left: calc(50% - 80px);
+  top: 146px;
+  width: 160px;
+}
+
+.main-horizontal::after {
+  display: none;
 }
 
 .framework-grid {
+  align-items: stretch;
   display: grid;
-  gap: clamp(20px, 4vw, 56px);
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding-top: 128px;
+  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-top: 98px;
 }
 
 .framework-column {
-  align-items: center;
+  align-items: stretch;
   display: grid;
-  gap: 18px;
-  justify-items: center;
+  gap: 12px;
+  grid-template-rows: auto 1fr;
+  justify-items: stretch;
   position: relative;
 }
 
 .short-vertical {
-  height: 54px;
-  position: static;
-  width: 2px;
+  display: none;
 }
 
 .framework-node {
   align-items: center;
-  border: 1px solid transparent;
+  border: 1px solid rgba(31, 42, 68, 0.12);
   border-radius: 8px;
   box-shadow: 0 16px 38px rgba(31, 42, 68, 0.12);
   color: #172033;
-  display: inline-flex;
+  display: grid;
   font-size: 1.05rem;
   font-weight: 850;
+  grid-template-columns: auto 24px 1fr;
   gap: 10px;
-  justify-content: center;
-  min-height: 74px;
+  height: 76px;
+  justify-content: start;
   padding: 16px 18px;
+  text-align: left;
   width: 100%;
 }
 
+.framework-node > span:last-child {
+  line-height: 1.05;
+}
+
 .detail-card {
-  border: 0;
+  border: 1px solid rgba(31, 42, 68, 0.1);
   border-radius: 8px;
-  box-shadow: 0 18px 44px rgba(31, 42, 68, 0.1);
+  box-shadow: 0 20px 44px rgba(31, 42, 68, 0.11);
   color: #172033;
-  min-height: 248px;
-  padding: 28px;
-  text-align: center;
+  display: grid;
+  gap: 16px;
+  grid-template-rows: auto auto 1fr;
+  min-height: 470px;
+  overflow: hidden;
+  padding: 22px;
+  position: relative;
+  text-align: left;
   width: 100%;
+}
+
+.detail-card::before {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.18));
+  content: "";
+  height: 180px;
+  position: absolute;
+  right: -54px;
+  top: -44px;
+  transform: rotate(22deg);
+  width: 150px;
+}
+
+.detail-card::after {
+  display: none;
+}
+
+.framework-number {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(31, 42, 68, 0.1);
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 0.76rem;
+  font-weight: 900;
+  height: 30px;
+  justify-content: center;
+  width: 42px;
+}
+
+.card-icon {
+  align-items: center;
+  background: #172033;
+  border-radius: 8px;
+  color: #ffffff;
+  display: inline-flex;
+  height: 54px;
+  justify-content: center;
+  position: relative;
+  width: 54px;
+  z-index: 1;
+}
+
+.detail-card h3 {
+  color: #172033;
+  font-size: 1.12rem;
+  line-height: 1.12;
+  margin: 0 0 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.detail-card p {
+  color: #38455a;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .detail-card ol {
   display: grid;
+  align-content: start;
   gap: 8px;
-  list-style-position: inside;
+  list-style: none;
   margin: 0;
   padding: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .detail-card li {
-  font-size: clamp(0.98rem, 1.4vw, 1.15rem);
+  align-items: center;
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid rgba(31, 42, 68, 0.08);
+  border-radius: 8px;
+  display: flex;
+  font-size: 0.9rem;
   font-weight: 700;
+  min-height: 34px;
+  padding: 8px 10px;
+}
+
+.detail-card li::before {
+  background: #172033;
+  border-radius: 999px;
+  content: "";
+  flex: 0 0 7px;
+  height: 7px;
+  margin-right: 9px;
+}
+
+.flow-arrow {
+  align-items: center;
+  background: #172033;
+  border: 1px solid rgba(81, 96, 120, 0.22);
+  border-radius: 999px;
+  box-shadow: 0 12px 24px rgba(31, 42, 68, 0.22);
+  color: #ffffff;
+  display: flex;
+  height: 34px;
+  justify-content: center;
+  position: absolute;
+  right: -26px;
+  top: 95px;
+  width: 52px;
+  z-index: 5;
+}
+
+.flow-arrow span {
+  background: #ffffff;
+  flex: 1;
+  height: 2px;
+  margin-left: 9px;
+  opacity: 0.72;
+}
+
+.flow-arrow svg {
+  flex: 0 0 auto;
+  margin-left: -2px;
+  margin-right: 7px;
 }
 
 .green .framework-node,
 .green .detail-card,
 .checklist-panel.green {
-  background: #c8f2dc;
+  background: linear-gradient(145deg, #d7f8e5 0%, #b9ebd2 100%);
   border-color: #79d0a2;
 }
 
 .amber .framework-node,
 .amber .detail-card,
 .checklist-panel.amber {
-  background: #fff1b8;
+  background: linear-gradient(145deg, #fff4bf 0%, #f8dda0 100%);
   border-color: #e6c858;
 }
 
 .indigo .framework-node,
 .indigo .detail-card,
 .checklist-panel.indigo {
-  background: #dcd9ff;
+  background: linear-gradient(145deg, #e7e3ff 0%, #cbc4f7 100%);
   border-color: #aaa4ec;
+}
+
+.teal .framework-node,
+.teal .detail-card,
+.checklist-panel.teal {
+  background: linear-gradient(145deg, #d5f8f8 0%, #b7e6e9 100%);
+  border-color: #7fcbd0;
 }
 
 .page-header {
@@ -484,6 +631,31 @@ h2 {
   padding: 16px;
 }
 
+.app-footer {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(104, 119, 143, 0.22);
+  border-radius: 8px;
+  color: #60708a;
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  gap: 14px;
+  justify-content: space-between;
+  margin: auto auto 0;
+  max-width: 1180px;
+  padding: 16px 18px;
+  width: 100%;
+}
+
+.app-footer span:first-child {
+  color: #172033;
+}
+
+.app-footer span:nth-child(2) {
+  color: #1f7a8c;
+}
+
 @media (max-width: 860px) {
   .topbar,
   .page-header,
@@ -511,12 +683,21 @@ h2 {
     padding-top: 28px;
   }
 
-  .short-vertical {
-    height: 28px;
+  .flow-arrow {
+    display: none;
+  }
+
+  .framework-column {
+    grid-template-rows: auto 1fr;
   }
 
   .detail-card {
     min-height: 0;
+  }
+
+  .app-footer {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 
